@@ -21,7 +21,7 @@ waybar > /dev/null 2>&1 &
 sleep 0.2
 swaync > /dev/null 2>&1 &
 
-# for cava-pywal (note, need to manually restart cava once wallpaper changes)
+# for cava pywal colors
 cp -r "$HOME/.cache/wal/cava-config.cava" "$HOME/.config/cava/config" || true
 
 # refresh pywal colors for firefox
