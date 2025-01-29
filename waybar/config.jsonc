@@ -1,0 +1,172 @@
+/***
+ *    ┓ ┏┏┓┓┏┳┓┏┓┳┓  ┏┓┏┓┳┓┏┓┳┏┓
+ *    ┃┃┃┣┫┗┫┣┫┣┫┣┫  ┃ ┃┃┃┃┣ ┃┃┓
+ *    ┗┻┛┛┗┗┛┻┛┛┗┛┗  ┗┛┗┛┛┗┻ ┻┗┛
+ *                              
+ */
+
+
+{
+  "layer": "top",
+  "position": "top",
+  "modules-center": ["hyprland/workspaces"],
+  "modules-left": [
+    "custom/startmenu",
+    "hyprland/window",
+    "pulseaudio",
+    "cpu",
+    "memory",
+    "idle_inhibitor"
+  ],
+  "modules-right": [
+    "custom/notification",
+    "custom/exit",
+    "custom/pacman",
+    "battery",
+    "network",
+    "tray",
+    "clock"
+  ],
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "format-icons": {
+      "default": " ",
+      "active": " ",
+      "urgent": " "
+    },
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+  "clock": {
+    "format": " {:L%H:%M}",
+    "tooltip": true,
+    "tooltip-format": "<big>{:%A, %d,%B %Y }</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "hyprland/window": {
+    "max-length": 22,
+    "icon": true,
+    "icon-size": 30,
+    "separate-outputs": false,
+    "rewrite": {
+      "": "  No Windows? ",
+    }
+  },
+  "memory": {
+    "interval": 5,
+    "format": " {}%",
+    "tooltip": true
+  },
+  "cpu": {
+    "interval": 5,
+    "format": " {usage:2}%",
+    "tooltip": true
+  },
+  "disk": {
+    "format": " {free}",
+    "tooltip": true
+  },
+  "network": {
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ],
+    "format-ethernet": " {bandwidthDownOctets}",
+    "format-wifi": "{icon} {signalStrength}%",
+    "format-disconnected": "󰤮",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} 🖧 ",
+    "on-click": "kitty nmtui"
+  },
+  "tray": {
+    "spacing": 12
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}% {format_source}",
+    "format-bluetooth": "{icon} {volume}% {format_source}",
+    "format-bluetooth-muted": "{icon} {format_source}",
+    "format-muted": "󰝟",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphones": [" ", " ", " "],
+      "handsfree": "󰴸",
+      "headset":  [" ", " ", " "],
+      "phone": [" ", " ", " "],
+      "portable": [" ", " ", " "],
+      "car": [" ", " ", " "],
+      "default": ["", "", ""]
+    },
+    "on-click": "sleep 0.1 && pavucontrol"
+  },
+  "custom/exit": {
+    "tooltip": false,
+    "format": "",
+    "on-click": "sleep 0.1 && ~/.config/rofi/scripts/powermenu"
+  },
+  "custom/startmenu": {
+    "tooltip": false,
+    "format": "󰣇",
+    "on-click": "sleep 0.1 && ~/.config/rofi/scripts/launcher"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰈈",
+      "deactivated": "󰈉"
+    },
+    "tooltip": "true"
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  
+  "custom/pacman": {
+    "format": "󰅢 {}",
+    "interval": 30,   
+    "exec": "checkupdates | wc -l",
+    "exec-if": "exit 0",
+    "on-click": "kitty sh -c 'paru; sudo pacman -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
+    "signal": 8,
+    "tooltip": false,
+  },
+  "battery": {
+    "interval":30,
+    "states": {
+        "good": 95,
+        "warning": 30,
+        "critical": 20
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% 󰂄 ",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+    "󰁻",
+    "󰁼",
+    "󰁾",
+    "󰂀",
+    "󰂂",
+    "󰁹"
+    ],
+  }
+}

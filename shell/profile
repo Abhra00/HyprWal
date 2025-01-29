@@ -1,0 +1,18 @@
+export EDITOR="nvim"
+export TERMINAL="kitty"
+export BROWSER="firefox"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export KODI_DATA="$XDG_DATA_HOME/kodi"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export PATH=$PATH:$HOME/.local/bin
+
+
+# Starting Wayland
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  dbus-launch Hyprland
+fi
