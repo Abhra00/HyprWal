@@ -1,0 +1,122 @@
+format = """
+$os\
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$python\
+$lua\
+$nodejs\
+$golang\
+$haskell\
+$rust\
+$ruby\
+$package\
+$aws\
+$docker_context\
+$jobs\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = true
+
+[os]
+format = "[$symbol]($style)"
+style = "bold blue"
+disabled = false
+
+[os.symbols]
+Arch = "󰣇 "
+
+[character]
+success_symbol = '[∯](bold green) '
+error_symbol = '[∯](bold red) '
+
+[directory]
+style = 'bold fg:red'
+format = '[$path ]($style)'
+truncation_length = 3
+truncation_symbol = '~/…/'
+truncate_to_repo = false
+
+[directory.substitutions]
+'Documents' = '󰈙'
+'Downloads' = ' '
+'Music' = ' '
+'Pictures' = ' '
+
+[git_branch]
+style = 'fg:green'
+symbol = ' '
+format = '[on](white) [$symbol$branch ]($style)'
+
+[git_status]
+style = 'fg:green'
+format = '([$all_status$ahead_behind]($style) )'
+
+[fill]
+symbol = ' '
+
+[python]
+style = 'yellow'
+symbol = ' '
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+pyenv_version_name = true
+pyenv_prefix = ''
+
+[lua]
+style = 'bright-blue'
+symbol = ' '
+format = ' [$symbol$version]($style) '
+
+[nodejs]
+style = 'bright-blue'
+symbol = ' '
+format = ' [$symbol$version]($style) '
+
+[golang]
+style = 'bright-blue'
+symbol = ' '
+format = ' [$symbol$version]($style) '
+
+[haskell]
+style = 'bright-blue'
+symbol = ' '
+format = ' [$symbol$version]($style) '
+
+[rust]
+style = 'bright-magneta'
+symbol = ' '
+format = ' [$symbol$version]($style) '
+
+[ruby]
+style = 'bright-blue'
+symbol = ' '
+format = ' [$symbol$version]($style) '
+
+[package]
+symbol = '󰏗 '
+
+[aws]
+symbol = ' '
+style = 'yellow'
+format = '[$symbol($profile )(\[$duration\] )]($style)'
+
+[docker_context]
+symbol = ' '
+style = 'fg:bright-green'
+format = '[$symbol]($style) $path'
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+detect_extensions = ['Dockerfile']
+
+[jobs]
+symbol = ' '
+style = 'bright-red'
+number_threshold = 1
+format = '[$symbol]($style)'
+
+[cmd_duration]
+min_time = 500
+style = 'fg:bright-blue'
+format = '[󰔚 $duration]($style)'
